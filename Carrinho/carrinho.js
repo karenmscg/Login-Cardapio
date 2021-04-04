@@ -5,8 +5,8 @@ if (document.readyState == 'loading'){
 }
 
 function ready (){
-const removeItensCarrinho = document.getElementsByClassName('btn-cuidado')
-    console.log (removeItensCarrinho)
+const removeItensCarrinho = document.getElementsByClassName('botao-cuidado')
+   // console.log (removeItensCarrinho)
     for (let i = 0; i < removeItensCarrinho.length; i++) {
     const button = removeItensCarrinho[i]
     button.addEventListener('click', removerItemCarrinho)
@@ -29,19 +29,19 @@ document.getElementsByClassName('botao_comprar')[0].addEventListener('click', bo
 }
 function quantidadeMudanças(event) {
     const input = event.target
-    if (isNaN(input.value) || input.value <=0) {
+    if (isNaN(input.value) || input.value <=0 ) {
         input.value = 1
     }
     updateTotalCarrinho()
 }
 
-function botaoFinaliza (event) {
+function botaoFinalizar (event) {
     window.alert ('Obrigada pelo seu pedido! Em breve ele estará na sua casa!')
     const carItens = document.getElementsByClassName('carrinho-itens')[0]
     while (carItens.hasChildNodes()){
         carItens.removeChild(carItens.firstChild)
     }
-    updateTotalCarrinho()
+    updateTotalCarrinho() 
 }
 
 function addCarrinhoClick(event) {
@@ -51,14 +51,23 @@ function addCarrinhoClick(event) {
     const preco = comprarItem.getElementsByClassName('valor-item')[0].innerText
     const imagem = comprarItem.getElementsByClassName('imagem')[0].src
 
-    console.log (nome, preco, imagem)
+   // console.log (nome, preco, imagem)
     AddItemCarrinho (nome, preco, imagem)
     updateTotalCarrinho()
 
 }
 
 function AddItemCarrinho (nome, preco, imagem){
-    const quantCarrinho = document.createElement('div')
+    const quantCarrinho = document.createElement(`
+    <div class="carrinho-item carrinho-coluna">
+    <img class="imagem" src="${imagem}" width="100" height="100">
+    <span class="item-carrinho">${none}</span>
+</div>
+<span class="preco-carrinho carrinho-coluna">${preco}</span>
+<div class="carrinho-quantidade carrinho-coluna">
+    <input class="input__carrinho-quantidade" type="number" value="1">
+    <button class="botao botao-cuidado" type="button">REMOVE</button>
+</div>`)
     quantCarrinho.classList.add('quantCarrinho')
     const CarrinhoItemNome = carrinhoItem.getElementsByClassName('carrinho-nome-item')
     for ( let i = 0; i < CarrinhoItemNome.length; i++) {
@@ -68,10 +77,10 @@ function AddItemCarrinho (nome, preco, imagem){
     }
     //quantCarrinho.innerText = nome 
     const carrinhoItem = document.getElementsByClassName ('carrinho-item')[0]
-    const carrinhoQuantCont = ('') //add o html aqui depois 
+    const carrinhoQuantCont = (``)
     quantCarrinho.innerHTML = carrinhoQuantCont
     carrinhoItem.append(quantCarrinho)
-    quantCarrinho.getElementsByClassName('btn-cuidado')[0].addEventListener('click', removerItemCarrinho)
+    quantCarrinho.getElementsByClassName('button-cuidado')[0].addEventListener('click', removerItemCarrinho)
     quantCarrinho.getElementsByClassName ('input__carrinho-quantidade')[0].addEventListener('change', quantidadeMudanças)
     
     carrinhoItem.appendChild(quantCarrinho)
@@ -89,7 +98,7 @@ function updateTotalCarrinho () {
     const total = 0
     for (let i = 0; i < rowBasket.length; i++) {
         const carrinhos = rowBasket[i]
-        const precoElemento = carrinhos.getElementsByClassName('preço-carrinho')[0]
+        const precoElemento = carrinhos.getElementsByClassName('preco-carrinho')[0]
         const quantidadeElemento = carrinhos.getElementsByClassName ('input__carrinho-quantidade')[0]
         //console.log(input__carrinho-quantidade, precoElemento)   
         const preco = parseFloat(precoElemento.innerText.replace('$',''))
