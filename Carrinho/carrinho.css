@@ -30,10 +30,13 @@ body {
 h2 {
     text-align: center;
 }
+
 .comprar-itens{
     justify-items: center;
     text-align: center;
+    
 }
+
 
 .valor-item{
     font-weight: bold;

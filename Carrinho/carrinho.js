@@ -1,113 +1,22 @@
-if (document.readyState == 'loading'){
-    document.addEventListener('DOMContentLoaded', ready)
-} else {
-    ready ()
-}
+//console.log('oie')
 
-function ready (){
-const removeItensCarrinho = document.getElementsByClassName('botao-cuidado')
-   // console.log (removeItensCarrinho)
-    for (let i = 0; i < removeItensCarrinho.length; i++) {
-    const button = removeItensCarrinho[i]
-    button.addEventListener('click', removerItemCarrinho)
-    }
-
-
-const quantidadeInput = document.getElementsByClassName ('input__carrinho-quantidade')
-for (let i = 0; i < quantidadeInput.length; i++) {
-    const input = quantidadeInput[i]
-    input.addEventListener('mudanças', quantidadeMudanças)
-    }
-
-
-const addCarrinho = document.getElementsByClassName ('botao_add-Item')
-for (let i = 0; i < addCarrinho.length; i++) {
-    const button = addCarrinho [i]
-    button.addEventListener ('click', addCarrinhoClick())
-}
-document.getElementsByClassName('botao_comprar')[0].addEventListener('click', botaoFinalizar)
-}
-function quantidadeMudanças(event) {
-    const input = event.target
-    if (isNaN(input.value) || input.value <=0 ) {
-        input.value = 1
-    }
-    updateTotalCarrinho()
-}
-
-function botaoFinalizar (event) {
-    window.alert ('Obrigada pelo seu pedido! Em breve ele estará na sua casa!')
-    const carItens = document.getElementsByClassName('carrinho-itens')[0]
-    while (carItens.hasChildNodes()){
-        carItens.removeChild(carItens.firstChild)
-    }
-    updateTotalCarrinho() 
-}
-
-function addCarrinhoClick(event) {
-    const button = event.target
-    const comprarItem = button.parentElement.parentElement
-    const nome = comprarItem.getElementsByClassName('comprar-item')[0].innerText
-    const preco = comprarItem.getElementsByClassName('valor-item')[0].innerText
-    const imagem = comprarItem.getElementsByClassName('imagem')[0].src
-
-   // console.log (nome, preco, imagem)
-    AddItemCarrinho (nome, preco, imagem)
-    updateTotalCarrinho()
-
-}
-
-function AddItemCarrinho (nome, preco, imagem){
-    const quantCarrinho = document.createElement(`
-    <div class="carrinho-item carrinho-coluna">
-    <img class="imagem" src="${imagem}" width="100" height="100">
-    <span class="item-carrinho">${none}</span>
-</div>
-<span class="preco-carrinho carrinho-coluna">${preco}</span>
-<div class="carrinho-quantidade carrinho-coluna">
-    <input class="input__carrinho-quantidade" type="number" value="1">
-    <button class="botao botao-cuidado" type="button">REMOVE</button>
-</div>`)
-    quantCarrinho.classList.add('quantCarrinho')
-    const CarrinhoItemNome = carrinhoItem.getElementsByClassName('carrinho-nome-item')
-    for ( let i = 0; i < CarrinhoItemNome.length; i++) {
-        if(CarrinhoItemNome[i].innerText == nome) {
-            return window.alert('Esse item já foi adicionado ao carrinho!')
-        }
-    }
-    //quantCarrinho.innerText = nome 
-    const carrinhoItem = document.getElementsByClassName ('carrinho-item')[0]
-    const carrinhoQuantCont = (``)
-    quantCarrinho.innerHTML = carrinhoQuantCont
-    carrinhoItem.append(quantCarrinho)
-    quantCarrinho.getElementsByClassName('button-cuidado')[0].addEventListener('click', removerItemCarrinho)
-    quantCarrinho.getElementsByClassName ('input__carrinho-quantidade')[0].addEventListener('change', quantidadeMudanças)
-    
-    carrinhoItem.appendChild(quantCarrinho)
-}
-
-function removerItemCarrinho (event) {
-    const ClicouBotao = event.target
-        ClicouBotao.parentElement.parentElement.remove()
+const removerItensCarrinho = document.getElementsByClassName('botao-cuidado')
+for (let i = 0; i< removerItensCarrinho.length; i++){
+    const botao = removerItensCarrinho[i]
+    botao.addEventListener('click', function(event){
+        const botaoClicou = event.target
+        botaoClicou.parentElement.parentElement.remove()
         updateTotalCarrinho()
+    })
 }
 
-function updateTotalCarrinho () {
-    const containerCarrinho = document.getElementsByClassName('item-carrinho')[0]
-    const rowBasket =  containerCarrinho.getElementsByClassName ('row-basket')
-    const total = 0
-    for (let i = 0; i < rowBasket.length; i++) {
-        const carrinhos = rowBasket[i]
-        const precoElemento = carrinhos.getElementsByClassName('preco-carrinho')[0]
-        const quantidadeElemento = carrinhos.getElementsByClassName ('input__carrinho-quantidade')[0]
-        //console.log(input__carrinho-quantidade, precoElemento)   
-        const preco = parseFloat(precoElemento.innerText.replace('$',''))
-        //console.log(preco)
-        const quantidade = quantidadeElemento.value
-            //console.log (preco * quantidade)
-        total += (preco * quantidade)
-    }
-
-    total = Math.round(total * 100) / 100
-    document.getElementsByClassName('precoTotalCarrinho')[0].innerText = '$' + total
+function updateTotalCarrinho() {
+    const carrinhoItemContainer = document.getElementsByClassName('itens-carrinho')[0]
+    const basket = carrinhoItemContainer.getElementsByClassName('basket-row')
+    for (let i = 0; i< removerItensCarrinho.length; i++){
+        const basketRow = basket [i]
+        const precoElemento = basket.getElementsByClassName('carrinho-preco')[0]
+        const quantidade = basket.getElementsByClassName('input__carrinho-quantidade')[0]
+        const preco = precoElemento.innerText
+}
 }

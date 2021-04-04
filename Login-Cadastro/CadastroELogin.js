@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     const loginForm = document.querySelector('#login')
     const criarContaForm  = document.querySelector('#criarConta')
 
-document.querySelector('#linkCriarConta').addEventListener ('click', e => {
+/*document.querySelector('#linkCriarConta').addEventListener ('click', e => {
     e.preventDefault()
     loginForm.classList.add('form--hidden')
     criarContaForm.classList.remove('form--hidden')
@@ -30,13 +30,8 @@ document.querySelector('#linkLogin').addEventListener ('click', e => {
     e.preventDefault()
     loginForm.classList.remove('form--hidden')
     criarContaForm.classList.add('form--hidden')
-})
+})*/
 
-loginForm.addEventListener ('submit', e => {
-    e.preventDefault ()
-    
-    AjustarMensagem(loginForm, "erro", "Verifique seu usuário ou sua senha!")
-})
 
 document.querySelectorAll ('.form__input').forEach ( inputElemento => {
     inputElemento.addEventListener('blur', e => {
