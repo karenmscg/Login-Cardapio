@@ -14,9 +14,7 @@ body {
     font-size: 18px;
 }
 
-.form--hidden {
-    display: none;
-}
+
 
 .container {
     width: 400px;
@@ -28,6 +26,10 @@ body {
     border-radius: var(--border-radius);
     border: 1px solid var(--color-error);
  }
+
+ .form--hidden {
+    display: none;
+}
 
  .container, .form__input, .form__button {
     font-size: 500;
@@ -47,6 +49,10 @@ body {
  .mensagem{
      text-align: center;
  }
+
+ .form__message--successo {
+    color: var(--color-success);
+}
 
  .form__input-mensagem-erro, .mensagem_erro {
      color: var(--color-error);
@@ -95,7 +101,7 @@ body {
  }
 
  .form__button:active {
-     transform: scale(0.95);
+     transform: scale(0.99);
      border:none;
  }
 
